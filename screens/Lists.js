@@ -61,7 +61,7 @@ export default class Lists extends React.Component {
                  <Text style ={{fontSize: 24, paddingHorizontal: 20, paddingVertical: 15,}}>{item.original_title}</Text>
                   <Text style={styles.overview}>{item.overview}</Text>
           </View>
-              </View> }/>;
+              </View> } keyExtractor={(item, index) => index.toString()}/>;
 
 
 

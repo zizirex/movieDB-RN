@@ -67,7 +67,7 @@ export default class Search extends React.Component {
                     <Text style ={{fontSize: 24, paddingHorizontal: 20,}}>{item.original_title}</Text>
                     <Text style={styles.overview}>{item.overview}</Text>
                 </View>
-            </View> }/>;
+            </View> } keyExtractor={(item, index) => index.toString()}/>;
 
             function renderIf(condition1,condition2, content) {
                 if (condition1, condition2) {
@@ -83,7 +83,7 @@ export default class Search extends React.Component {
                                    resizeMode='cover' style={{width: 300, height: 500, alignSelf: 'center',}}/>
                             <Text>{item.known_for.original_title}</Text>
                         </View>
-                    }/>;
+                    } keyExtractor={(item, index) => index.toString()}/>;
 
             // console.log(this.state.data);
             return (

@@ -47,7 +47,7 @@ export default class NowPlaying extends React.Component {
           <Text style={styles.other}>{item.popularity}</Text>
           <Text style={styles.other}>{item.release_date}</Text>
           <Text style={styles.overview}>{item.overview}</Text>
-      </View> }/>;
+      </View> } keyExtractor={(item, index) => index.toString()}/>;
       // console.log(this.state.data);
     return (
       <View style={styles.container}>
