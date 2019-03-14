@@ -51,7 +51,7 @@ export default class Search extends React.Component {
                 shows = <Text style={styles.title}> Movie results for {this.state.search} </Text>;
                 // {this._getMovies()}
             }else if (page == 2) {
-                shows = <Text style={styles.title}> Actor / Actress that contain the name of  {this.state.search}  </Text>
+                shows = <Text style={styles.titleSearch}> Actor / Actress that contain the name of  {this.state.search}  </Text>
                 // {this._getMovies()}
             }else if (page == 3) {
                 shows = <Text style={styles.title}> TV Show results for {this.state.search} </Text>
@@ -145,7 +145,7 @@ export default class Search extends React.Component {
                 .then((responseJson) => {
                     this.setState({data: responseJson.results});
                     console.log(this.state.type);
-                    console.log(this.state.search);;
+                    console.log(this.state.search);
                     console.log(URL);
                 })
                 .catch((error) => {
@@ -166,6 +166,14 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         alignSelf: 'center',
         paddingHorizontal: 15,
+        marginHorizontal: 15,
+    },
+    titleSearch:{
+        fontSize: 20,
+        fontWeight: "600",
+        alignSelf: 'center',
+        paddingHorizontal: 15,
+        marginHorizontal: 15,
     },
     overview:{
         paddingHorizontal: 20,
