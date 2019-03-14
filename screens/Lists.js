@@ -30,11 +30,9 @@ export default class Lists extends React.Component {
   static navigationOptions = {
     title: 'List',
   };
-    componentWillMount () {
+    componentDidMount () {
         this._getMovies();
     }
-
-
 
 
   render() {
@@ -42,31 +40,35 @@ export default class Lists extends React.Component {
       const page = this.state.page;
       let shows = null;
       if (page == 1 ){
-          shows = <Text> Popular Movies </Text>
+          shows = <Text style={styles.title}>Popular Movies </Text>;
           {this._getMovies()}
       }else if (page == 2) {
-          shows = <Text> Top Rated Movies </Text>
+          shows = <Text style={styles.title}>Top Rated Movies </Text>;
           {this._getMovies()}
       }else if (page == 3) {
-          shows = <Text> Upcoming Movies </Text>
+          shows = <Text style={styles.title}>Upcoming Movies </Text>;
           {this._getMovies()}
       }
 
 
 
-      const movies =  <FlatList data = {this.state.data} renderItem={ ({item}) => <View>
-                  <Text>{item.original_title}</Text>
+      const movies =  <FlatList data = {this.state.data} renderItem={ ({item}) => <View style={{marginVertical: 20,}}>
+                 <View style={{flex: 1}}>
                   <Image source={{uri: `https://image.tmdb.org/t/p/original/${item.poster_path}`}}
-                         resizeMode='cover' style={{width: 100, height: 180,}}/>
-                  <Text>{item.overview}</Text>
+                         resizeMode='cover' style={styles.smallside}/>
+                 </View>
+          <View style={{flex: 1}}>
+                 <Text style ={{fontSize: 24, paddingHorizontal: 20, paddingVertical: 15,}}>{item.original_title}</Text>
+                  <Text style={styles.overview}>{item.overview}</Text>
+          </View>
               </View> }/>;
 
 
 
 
-    return <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    return <ScrollView style={styles.container}>
           <View>
-              <Header>
+              <Header hasSegment>
               <Segment>
                   <Button first
                       active={this.state.firstpageactive}
@@ -147,6 +149,28 @@ export default class Lists extends React.Component {
 
 }
 const styles = StyleSheet.create({
+    title: {
+        fontSize: 32,
+        fontWeight: "600",
+        alignSelf: 'center',
+        paddingHorizontal: 15,
+    },
+    overview: {
+        paddingHorizontal: 20,
+        paddingVertical:10,
+        flex: 2,
+    },
+    other:{
+        paddingHorizontal: 20,
+        paddingVertical:10,
+        textAlign: 'center'
+    },
+          smallside:{
+        height:180,
+          width: 100,
+       alignSelf: 'center',
+              paddingVertical: 20,
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',

@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    FlatList,
+    Image,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import axios from 'axios';
@@ -20,7 +21,8 @@ export default class NowPlaying extends React.Component {
       poster : null,
   }
   static navigationOptions = {
-    header: null,
+    // header: null,
+      title: 'Now Playing'
 
   };
   componentDidMount () {
@@ -37,21 +39,22 @@ export default class NowPlaying extends React.Component {
 
   render() {
 
-       let movies = this.state.data.map((val, key) => {
-          return <View key={key}>
-              <Text>{val.original_title}</Text>
-              <Image source={{uri:`https://image.tmdb.org/t/p/original/${val.poster_path}`}}
-               resizeMode= 'cover' style={{width: 300, height: 500,}}/>
-              <Text>{val.overview}</Text>
-          </View>
-      });
+      const movies =  <FlatList data = {this.state.data} renderItem={ ({item}) => <View style={styles.contentContainer}>
+
+          <Image source={{uri: `https://image.tmdb.org/t/p/original/${item.poster_path}`}}
+                 resizeMode='cover' style={{width: 300, height: 500, alignSelf: 'center'}}/>
+          <Text style={styles.title} >{item.original_title}</Text>
+          <Text style={styles.other}>{item.popularity}</Text>
+          <Text style={styles.other}>{item.release_date}</Text>
+          <Text style={styles.overview}>{item.overview}</Text>
+      </View> }/>;
       // console.log(this.state.data);
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
          <View>
 
-             <Text>Now Playing</Text>
+             {/*<Text>Now Playing</Text>*/}
              {movies}
          </View>
         </ScrollView>
@@ -61,41 +64,26 @@ export default class NowPlaying extends React.Component {
     );
   }
 
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
 
 const styles = StyleSheet.create({
+    title:{
+      fontSize: 40,
+        fontWeight: "600",
+        alignSelf: 'center',
+        paddingHorizontal: 15,
+    },
+    overview:{
+      paddingHorizontal: 20,
+        paddingVertical:10,
+    },
+    other:{
+      paddingHorizontal: 20,
+        paddingVertical:10,
+        textAlign: 'center'
+    },
+
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -182,4 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+    poster: {
+    alignSelf: 'center'
+    }
 });
